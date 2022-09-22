@@ -477,6 +477,15 @@ function git_pullable () {
 }
 export -f git_pullable
 
+# [all]
+# PATH is an environmental variable in Linux and other Unix-like operating systems 
+# that tells the shell which directories to search for executable files. This
+# function prints the PATH variable content one directory per line
+function print_path () {
+	echo -e ${PATH//:/\\n}
+}
+export -f print_path
+
 
 # ---------------------------------------------------------------------------- #
 
