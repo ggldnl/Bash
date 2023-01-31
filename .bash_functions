@@ -493,8 +493,8 @@ export -f print_path
 # List all the available output devices (requires inxi)
 function list_audio_devices() {
 	sound_server=$(inxi -Ax | grep -E 'PulseAudio|PipeWire')
-	echo $servers | grep -q '.*PipeWire.*running: yes' && echo "PipeWire:" && pw-cli list-objects | grep node.name
-	echo $servers | grep -q '.*PulseAudio.*running: yes' && echo "PulseAudio:" && pacmd list-sources | grep -e 'index:' -e device.string -e 'name:'
+	echo $sound_servers | grep -q '.*PipeWire.*running: yes' && echo "PipeWire:" && pw-cli list-objects | grep node.name
+	echo $sound_servers | grep -q '.*PulseAudio.*running: yes' && echo "PulseAudio:" && pacmd list-sources | grep -e 'index:' -e device.string -e 'name:'
 }
 export -f list_audio_devices
 
