@@ -519,5 +519,6 @@ function tbt {
         pactl set-card-profile $card a2dp-sink
     fi
 }
+export -f tbt
 
 [ "$VERBOSE_SCRIPT" = true ] && echo "All functions imported"
