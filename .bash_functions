@@ -498,4 +498,26 @@ function list_audio_devices() {
 }
 export -f list_audio_devices
 
+# [all]
+# Toggle your bluetooth device (e.g., Bose Headphones) between A2DP mode (high-fidelity playback with NO microphone) and HSP/HFP, codec mSBC (lower playback quality, microphone ENABLED)
+# https://askubuntu.com/questions/1339765/replacing-pulseaudio-with-pipewire-in-ubuntu-20-04
+# 
+# to enable a2dp_sink add this to /etc/bluetooth/audio.conf:
+# [General] 
+# Enable=Source,Sink,Media,Socket
+# 
+# https://askubuntu.com/questions/765233/pulseaudio-fails-to-set-card-profile-to-a2dp-sink-how-can-i-see-the-logs-and
+function tbt {
+    current_mode_is_a2dp=`pactl list | grep Active | grep a2dp`
+    card=`pactl list | grep "Name: bluez_card." | cut -d ' ' -f 2`
+
+    if [ -n "$current_mode_is_a2dp" ]; then
+        echo "Switching $card to mSBC (headset, for making calls)..."
+        pactl set-card-profile $card headset-head-unit-msbc
+    else
+        echo "Switching $card to A2DP (high-fidelity playback)..."
+        pactl set-card-profile $card a2dp-sink
+    fi
+}
+
 [ "$VERBOSE_SCRIPT" = true ] && echo "All functions imported"
