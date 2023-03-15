@@ -525,7 +525,7 @@ export -f tbt
 # Scan the local network and list all the IPs.
 # Requires netdiscover
 function scan {
-    netdiscover -r 192.168.1.0/24
+    sudo netdiscover -r 192.168.1.0/24
 }
 export -f scan
 
